@@ -12,7 +12,8 @@ export class TimeCalculatorComponent implements OnInit {
   extraHours: string = '';
   punchOutTime: string = '';
   actualoutTime: string = '';
-
+  minPunchInTime: string = '08:00';
+  maxPunchInTime: string = '11:30';
   constructor() { }
 
   ngOnInit(): void {
@@ -43,8 +44,9 @@ export class TimeCalculatorComponent implements OnInit {
   // import * as moment from 'moment-timezone';
 
   calculatePunchOutTime(): void {
-    if (this.punchInTime === '' || this.extraHours === '') {
+    if (this.punchInTime === '' || this.extraHours === '' || !this.extraHours.includes('.') || this.extraHours.length > 5) {
       this.errorMessage = 'Please provide valid input';
+      this.resetForm();
       return;
     }
 
@@ -76,7 +78,8 @@ export class TimeCalculatorComponent implements OnInit {
     this.punchInTime = '';
     this.extraHours = '';
     this.punchOutTime = '';
-    this.errorMessage = '';
+    this.actualoutTime = '';
+    // this.errorMessage = '';
   }
 
   resetErrorMessage(): void {
